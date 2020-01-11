@@ -8,7 +8,7 @@ from twilio.rest import Client
 * Twilio API used https://twilio.com
 '''
 
-authFile = open("C:/FBS/Text_TC/AUTH.txt", "r").read()
+authFile = open("C:/FBS/FBSTC/Text_TC/AUTH.txt", "r").read()
 sid = authFile[:34]
 authToken = authFile[36:]
 client = Client(sid, authToken)
@@ -30,7 +30,7 @@ def howManyNumbers(): # ask user how many numbers do they want to add
 		addNums2File()
 
 def addNums2File(): # add each number to file
-	numberFile = open("C:/FBS/Text_TC/textToNumbers.txt", "a")
+	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "a")
 	numbers = 0
 
 	try:
@@ -47,8 +47,8 @@ def addNums2File(): # add each number to file
 	numberFile.close()
 
 def sendMessage(): # send a message to each number on file
-	textFrom = open("C:/FBS/Text_TC/textFrom.txt", "r").read()
-	numberFile = open("C:/FBS/Text_TC/textToNumbers.txt", "r").read()
+	textFrom = open("C:/FBS/FBSTC/Text_TC/textFrom.txt", "r").read()
+	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "r").read()
 	cnt = 0
 
 	for i in range(0, len(numberFile)): # count how many phone numbers
@@ -72,28 +72,28 @@ def sendMessage(): # send a message to each number on file
 		)
 		print(message.sid + ": Sent the message!")
 
-def caller():
+def timer():
 	dateTime = datetime.datetime.now()
 
 	if dateTime.strftime("%X") == "5:00:00":
-		# caller() causes error so don't run until fix is found
+		# timer() causes error so don't run until fix is found
 	# else:
 		sendMessage()
 
 def main(): # determin if send text or add numbers to file
-	if os.path.exists("C:/FBS/Text_TC/textToNumbers.txt"):
+	if os.path.exists("C:/FBS/FBSTC/Text_TC/textToNumbers.txt"):
 		isAddNums = input("Do you want to add numbers to the list of numbers? Y/n ")
 		if isAddNums.upper() == "Y":
 			howManyNumbers()
 			isSendMessage = input("Do you want to text all numbers? Y/n ")
 			if isSendMessage.upper() == "Y":
-				caller()
+				timer()
 			else:
 				print("Message not sent :(")
 		else:
-			caller()	
+			timer()	
 	else:
-		numberFile = open("C:/FBS/Text_TC/textToNumbers.txt", "w")
+		numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "w")
 		numberFile.close()
 		howManyNumbers()
 		main()

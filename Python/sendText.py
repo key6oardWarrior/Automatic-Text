@@ -1,10 +1,11 @@
 import os
+import datetime
 from twilio.rest import Client
 
 ''' 
 * Author https://github.com/key6oardWarrior
 * Code Propety of Full Blast S.T.E.A.M
-* Twi
+* Twilio API used https://twilio.com
 '''
 
 authFile = open("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/AUTH.txt", "r").read()
@@ -12,7 +13,7 @@ sid = authFile[:34]
 authToken = authFile[36:]
 client = Client(sid, authToken)
 
-def howManyNumbers(): # stores all emergancy numbers
+def howManyNumbers(): # ask user how many numbers do they want to add
 	num = 0
 
 	try:
@@ -28,7 +29,7 @@ def howManyNumbers(): # stores all emergancy numbers
 	for i in range(0, num):
 		addNums2File()
 
-def addNums2File():
+def addNums2File(): # add each number to file
 	numberFile = open("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/textToNumbers.txt", "a")
 	numbers = 0
 
@@ -45,7 +46,7 @@ def addNums2File():
 		numberFile.write(str(numbers) + " ")
 	numberFile.close()
 
-def sendMessage():
+def sendMessage(): # send a message to each number on file
 	numberFile = open("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/textToNumbers.txt", "r").read()
 	cnt = 0
 
@@ -70,18 +71,28 @@ def sendMessage():
 		)
 		print(message.sid + ": Sent the message!")
 
-def main():
+dateTime = datetime.datetime.now()
+
+def caller():
+	i = 0
+	if dateTime.strftime("%X") + dateTime.strftime("%p") == "5:00:00AM": # if fix is found: != not ==
+		# caller() cause error so don't run until fix is found
+	# else:
+		sendMessage()
+
+def main(): # determin if send text or add numbers to file
 	if os.path.exists("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/textToNumbers.txt"):
 		isAddNums = input("Do you want to add numbers to the list of numbers? Y/n ")
-		if(isAddNums.upper() == "Y"):
+		if isAddNums.upper() == "Y":
 			howManyNumbers()
 			isSendMessage = input("Do you want to text all numbers? Y/n ")
 			if isSendMessage.upper() == "Y":
-				sendMessage()
+				caller()
 			else:
 				print("Message not sent :(")
 		else:
-			sendMessage()
+			caller()
+			
 	else:
 		numberFile = open("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/textToNumbers.txt", "w")
 		numberFile.close()

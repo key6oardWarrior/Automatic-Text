@@ -13,22 +13,6 @@ sid = authFile[:34]
 authToken = authFile[36:]
 client = Client(sid, authToken)
 
-def howManyNumbers(): # ask user how many numbers do they want to add
-	num = 0
-
-	try: # handle type mismatch
-		num = int(input("Enter how many numbers you want to text: "))
-	except:
-		print("Enter only numbers")
-		howManyNumbers()
-	
-	if num <= 0:
-		print("Number must be greater than 0")
-		howManyNumbers()
-
-	for i in range(0, num):
-		addNums2File()
-
 def addNums2File(): # add each number to file
 	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "a")
 	numbers = 0
@@ -45,6 +29,22 @@ def addNums2File(): # add each number to file
 	else:
 		numberFile.write(str(numbers) + " ")
 	numberFile.close()
+
+def howManyNumbers(): # ask user how many numbers do they want to add
+	num = 0
+
+	try: # handle type mismatch
+		num = int(input("Enter how many numbers you want to text: "))
+	except:
+		print("Enter only numbers")
+		howManyNumbers()
+	
+	if num <= 0:
+		print("Number must be greater than 0")
+		howManyNumbers()
+
+	for i in range(0, num):
+		addNums2File()
 
 def currentTime(): # return what time it is
 	dateTime = datetime.datetime.now()

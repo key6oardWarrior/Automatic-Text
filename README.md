@@ -1,2 +1,5 @@
 # Automatic-Text
 Send text messages automatically team mates.
+1) Sign up/in to twillo via: https://www.twilio.com/
+2) Copy the SID and Auth Token
+3) Put into file called

@@ -71,12 +71,13 @@ def sendMessage(): # send a message to each number on file
 			to = i
 		)
 		print(message.sid + ": Sent the message!")
+		timer()
 
 def currentTime(): # return what time it is
 	dateTime = datetime.datetime.now()
 	return dateTime.strftime("%X")
 
-def timer(): # determin when to sent the message
+def timer(): # determin when to send the message
 	while currentTime() != "5:00:00":
 		currentTime()
 	sendMessage()

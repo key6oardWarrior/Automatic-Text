@@ -46,6 +46,15 @@ def addNums2File(): # add each number to file
 		numberFile.write(str(numbers) + " ")
 	numberFile.close()
 
+def currentTime(): # return what time it is
+	dateTime = datetime.datetime.now()
+	return dateTime.strftime("%X")
+
+def timer(): # determin when to send the message
+	while currentTime() != "5:00:00":
+		currentTime()
+	sendMessage()
+
 def sendMessage(): # send a message to each number on file
 	textFrom = open("C:/FBS/FBSTC/Text_TC/textFrom.txt", "r").read()
 	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "r").read()
@@ -66,7 +75,7 @@ def sendMessage(): # send a message to each number on file
 
 	for i in lstNums: # send message
 		message = client.messages.create(
-			body = "URGENT: Please Check the Tech Coach schedule to know if you are working today!\nPlease do not respond this is an automated messaging system.\nDesigned by https://github.com/key6oardWarrior",
+			body = "URGENT: Please Check the Tech Coach schedule to know if you are working today!\nPlease do not respond this is an automated messaging system.\nDesigned by Justyn (https://github.com/key6oardWarrior)",
 			from_ = textFrom, 
 			to = i
 		)
@@ -76,15 +85,6 @@ def sendMessage(): # send a message to each number on file
 		else:
 			print(message.sid)
 	timer()
-
-def currentTime(): # return what time it is
-	dateTime = datetime.datetime.now()
-	return dateTime.strftime("%X")
-
-def timer(): # determin when to send the message
-	while currentTime() != "5:00:00":
-		currentTime()
-	sendMessage()
 
 def main(): # determin if send text or add numbers to file
 	if os.path.exists("C:/FBS/FBSTC/Text_TC/textToNumbers.txt"):

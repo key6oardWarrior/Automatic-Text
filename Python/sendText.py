@@ -73,9 +73,9 @@ def sendMessage(): # send a message to each number on file
 
 		if message.sid == sid: # print either error or success for each number
 			print(message.sid + " sent the message!")
-			timer()
 		else:
 			print(message.sid)
+	timer()
 
 def currentTime(): # return what time it is
 	dateTime = datetime.datetime.now()

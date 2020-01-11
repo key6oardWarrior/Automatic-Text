@@ -71,12 +71,11 @@ def sendMessage(): # send a message to each number on file
 		)
 		print(message.sid + ": Sent the message!")
 
-dateTime = datetime.datetime.now()
-
 def caller():
-	i = 0
-	if dateTime.strftime("%X") + dateTime.strftime("%p") == "5:00:00AM": # if fix is found: != not ==
-		# caller() cause error so don't run until fix is found
+	dateTime = datetime.datetime.now()
+
+	if dateTime.strftime("%X") == "5:00:00":
+		# caller() causes error so don't run until fix is found
 	# else:
 		sendMessage()
 
@@ -91,7 +90,7 @@ def main(): # determin if send text or add numbers to file
 			else:
 				print("Message not sent :(")
 		else:
-			caller()
+			caller()	
 	else:
 		numberFile = open("C:/FBS/Text_TC/textToNumbers.txt", "w")
 		numberFile.close()

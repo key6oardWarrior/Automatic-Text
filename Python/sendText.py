@@ -72,13 +72,15 @@ def sendMessage(): # send a message to each number on file
 		)
 		print(message.sid + ": Sent the message!")
 
-def timer():
+def currentTime(): # return what time it is
 	dateTime = datetime.datetime.now()
+	return dateTime.strftime("%X")
 
-	if dateTime.strftime("%X") == "5:00:00":
-		# timer() causes error so don't run until fix is found
-	# else:
-		sendMessage()
+def timer(): # determin when to sent the message
+	while currentTime() != "5:00:00":
+		currentTime()
+	sendMessage()
+		
 
 def main(): # determin if send text or add numbers to file
 	if os.path.exists("C:/FBS/FBSTC/Text_TC/textToNumbers.txt"):

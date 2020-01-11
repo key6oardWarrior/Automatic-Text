@@ -47,6 +47,7 @@ def addNums2File(): # add each number to file
 	numberFile.close()
 
 def sendMessage(): # send a message to each number on file
+	textFrom = open("C:/FBS/Text_TC/textFrom.txt", "r").read()
 	numberFile = open("C:/FBS/Text_TC/textToNumbers.txt", "r").read()
 	cnt = 0
 
@@ -66,7 +67,7 @@ def sendMessage(): # send a message to each number on file
 	for i in lstNums:
 		message = client.messages.create(
 			body = 'URGENT: Please Check the schedule to know if you are working today!',
-			from_ = '+12512205235', 
+			from_ = textFrom, 
 			to = i
 		)
 		print(message.sid + ": Sent the message!")

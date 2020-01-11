@@ -81,7 +81,6 @@ def timer(): # determin when to send the message
 	while currentTime() != "5:00:00":
 		currentTime()
 	sendMessage()
-		
 
 def main(): # determin if send text or add numbers to file
 	if os.path.exists("C:/FBS/FBSTC/Text_TC/textToNumbers.txt"):

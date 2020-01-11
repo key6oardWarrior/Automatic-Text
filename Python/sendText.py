@@ -65,7 +65,7 @@ def sendMessage(): # send a message to each number on file
 
 	for i in lstNums:
 		message = client.messages.create(
-			body = 'Test',
+			body = 'URGENT: Please Check the schedule to know if you are working today!',
 			from_ = '+12512205235', 
 			to = i
 		)

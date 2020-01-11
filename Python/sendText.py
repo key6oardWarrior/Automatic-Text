@@ -16,7 +16,7 @@ client = Client(sid, authToken)
 def howManyNumbers(): # ask user how many numbers do they want to add
 	num = 0
 
-	try:
+	try: # handle type mismatch
 		num = int(input("Enter how many numbers you want to text: "))
 	except:
 		print("Enter only numbers")
@@ -33,7 +33,7 @@ def addNums2File(): # add each number to file
 	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "a")
 	numbers = 0
 
-	try:
+	try: # handle type mismatch
 		numbers = int(input("Enter number: "))
 	except:
 		print("Please only enter numbers")
@@ -64,14 +64,18 @@ def sendMessage(): # send a message to each number on file
 		else:
 			j += 1
 
-	for i in lstNums:
+	for i in lstNums: # send message
 		message = client.messages.create(
 			body = 'URGENT: Please Check the schedule to know if you are working today!',
 			from_ = textFrom, 
 			to = i
 		)
-		print(message.sid + ": Sent the message!")
-		timer()
+
+		if message.sid == sid: # print either error or success for each number
+			print(message.sid + " sent the message!")
+			timer()
+		else:
+			print(message.sid)
 
 def currentTime(): # return what time it is
 	dateTime = datetime.datetime.now()

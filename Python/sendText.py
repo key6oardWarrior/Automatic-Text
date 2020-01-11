@@ -8,7 +8,7 @@ from twilio.rest import Client
 * Twilio API used https://twilio.com
 '''
 
-authFile = open("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/AUTH.txt", "r").read()
+authFile = open("C:/FBS/Text_TC/AUTH.txt", "r").read()
 sid = authFile[:34]
 authToken = authFile[36:]
 client = Client(sid, authToken)
@@ -30,7 +30,7 @@ def howManyNumbers(): # ask user how many numbers do they want to add
 		addNums2File()
 
 def addNums2File(): # add each number to file
-	numberFile = open("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/textToNumbers.txt", "a")
+	numberFile = open("C:/FBS/Text_TC/textToNumbers.txt", "a")
 	numbers = 0
 
 	try:
@@ -47,7 +47,7 @@ def addNums2File(): # add each number to file
 	numberFile.close()
 
 def sendMessage(): # send a message to each number on file
-	numberFile = open("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/textToNumbers.txt", "r").read()
+	numberFile = open("C:/FBS/Text_TC/textToNumbers.txt", "r").read()
 	cnt = 0
 
 	for i in range(0, len(numberFile)): # count how many phone numbers
@@ -81,7 +81,7 @@ def caller():
 		sendMessage()
 
 def main(): # determin if send text or add numbers to file
-	if os.path.exists("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/textToNumbers.txt"):
+	if os.path.exists("C:/FBS/Text_TC/textToNumbers.txt"):
 		isAddNums = input("Do you want to add numbers to the list of numbers? Y/n ")
 		if isAddNums.upper() == "Y":
 			howManyNumbers()
@@ -92,9 +92,8 @@ def main(): # determin if send text or add numbers to file
 				print("Message not sent :(")
 		else:
 			caller()
-			
 	else:
-		numberFile = open("C:/Users/Lewjb/Documents/Code/FullBlast/FBSTC/Text_TC/textToNumbers.txt", "w")
+		numberFile = open("C:/FBS/Text_TC/textToNumbers.txt", "w")
 		numberFile.close()
 		howManyNumbers()
 		main()

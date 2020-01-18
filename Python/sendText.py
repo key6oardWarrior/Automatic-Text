@@ -4,8 +4,6 @@ from twilio.rest import Client
 
 ''' 
 * Author https://github.com/key6oardWarrior
-* Code Propety of Full Blast S.T.E.A.M
-* Twilio API used https://twilio.com
 '''
 
 authFile = open("C:/FBS/FBSTC/Text_TC/AUTH.txt", "r").read()

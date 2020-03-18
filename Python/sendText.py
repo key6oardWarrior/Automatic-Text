@@ -81,9 +81,6 @@ def timer(msgTimer): # determin when to send the message
 		pass
 	sendMessage(msgTimer)
 
-def mainCaller():
-	main()
-
 def main(): # determin if send text or add numbers to file
 	if os.path.exists("C:/FBS/FBSTC/Text_TC/textToNumbers.txt"):
 		isAddNums = input("Do you want to add numbers to the list of numbers? Y/n ")
@@ -120,7 +117,6 @@ def main(): # determin if send text or add numbers to file
 		textTime.write(temp)
 		textTime.close()
 		howManyNumbers()
-		mainCaller()
 
-if __name__ == "__main__":
+while __name__ == "__main__":
 	main()

@@ -77,7 +77,7 @@ def currentTime(): # return what time it is
 	return dateTime.strftime("%X")
 
 def timer(msgTimer): # determin when to send the message
-	while currentTime() != currentTime():
+	while currentTime() != msgTimer:
 		pass
 	sendMessage(msgTimer)
 

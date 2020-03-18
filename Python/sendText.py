@@ -64,7 +64,7 @@ def sendMessage(): # send a message to each number on file
 
 	for i in lstNums: # send message
 		message = client.messages.create(
-			body = "URGENT: Please Check the Tech Coach schedule to know if you are working today!\nPlease do not respond this is an automated messaging system.\nDesigned by Justyn (https://github.com/key6oardWarrior)",
+			body = "URGENT: Please Check the Tech Coach schedule to know if you are working today!\nPlease do not respond this is an automated messaging system.\nDesigned by https://github.com/key6oardWarrior",
 			from_ = textFrom, 
 			to = i
 		)

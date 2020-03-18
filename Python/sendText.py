@@ -72,12 +72,12 @@ def sendMessage(msgTimer): # send a message to each number on file
 			print(message.sid)
 	timer(msgTimer)
 
-def currentTime(): # return what time it is
+def getTime(): # return what time it is
 	dateTime = datetime.datetime.now()
 	return dateTime.strftime("%X")
 
 def timer(msgTimer): # determin when to send the message
-	while currentTime() != msgTimer:
+	while getTime() != msgTimer:
 		pass
 	sendMessage(msgTimer)
 

@@ -1,17 +1,34 @@
 import os
+import sys
 import datetime
 from twilio.rest import Client
 
 # @author: https://github.com/key6oardWarrior
 
-authFile = open("C:/FBS/FBSTC/Text_TC/AUTH.txt", "r").read()
-sid = authFile[:34]
-authToken = authFile[36:]
-client = Client(sid, authToken)
+sid = ""
+authToken = ""
 callTimer = False
 
+if not(os.path.exists("C:/Code/Python/AutoText/AUTH.txt")):
+	authFile = open("C:/Code/Python/AutoText/AUTH.txt", "w")
+	authFile.write(input("Enter Twilio SID: ") + ", ")
+	authFile.write(input("Enter Twilio authentcation token: "))
+	authFile.close()
+
+authFile = open("C:/Code/Python/AutoText/AUTH.txt", "r").read()
+
+try:
+	sid = authFile[:34]
+	authToken = authFile[36:]
+except:
+	os.remove("C:/Code/Python/AutoText/AUTH.txt")
+	print("SID must be 34 characters long and authentcation token must be at least 32 characters long. Please exit program and try again!")
+	sys.exit()
+
+client = Client(sid, authToken)
+
 def addNums2File(): # add each number to file
-	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "a")
+	numberFile = open("C:/Code/Python/AutoText/textToNumbers.txt", "a")
 	numbers = 0
 
 	try: # handle type mismatch
@@ -45,7 +62,7 @@ def howManyNumbers(): # ask user how many numbers do they want to add
 
 def removeNums():
 	nums = [""]
-	numbers = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "r").read()
+	numbers = open("C:/Code/Python/AutoText/textToNumbers.txt", "r").read()
 	nums2Remove = input("What numbers do you want to remove (seprate each by whitespace)? ")
 	j = 0
 
@@ -64,18 +81,18 @@ def removeNums():
 			j += 11
 
 	print("final print: " + numbers)
-	fileWriter = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "w").write(numbers)
+	fileWriter = open("C:/Code/Python/AutoText/textToNumbers.txt", "w").write(numbers)
 
 def timeChanger():
-	textTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "w").write(input("What time do you want your message to be recived? Format MUST BE: hh:mm:ss "))
+	textTime = open("C:/Code/Python/AutoText/textTime.txt", "w").write(input("What time do you want your message to be recived? Format MUST BE: hh:mm:ss "))
 
 def msgChanger():
-	messageChanger = open("C:/FBS/FBSTC/Text_TC/message.txt", "w").write(input("Enter new message: "))
+	messageChanger = open("C:/Code/Python/AutoText/message.txt", "w").write(input("Enter new message: "))
 
 def sendMessage(): # send a message to each number on file
-	textFrom = open("C:/FBS/FBSTC/Text_TC/textFrom.txt", "r").read()
-	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "r").read()
-	message = open("C:/FBS/FBSTC/Text_TC/message.txt").read()
+	textFrom = open("C:/Code/Python/AutoText/textFrom.txt", "r").read()
+	numberFile = open("C:/Code/Python/AutoText/textToNumbers.txt", "r").read()
+	message = open("C:/Code/Python/AutoText/message.txt").read()
 	lstNums = [""]
 	j = 0
 
@@ -110,7 +127,7 @@ def timer(msgTimer): # determin when to send the message
 	sendMessage()
 
 def main(): # handle user input
-	if os.path.exists("C:/FBS/FBSTC/Text_TC/textToNumbers.txt"):
+	if os.path.exists("C:/Code/Python/AutoText/textToNumbers.txt"):
 		isAddNums = input("Do you want to add numbers to the list of numbers? Y/n ")
 		if isAddNums.upper() == "Y":
 			howManyNumbers()
@@ -127,10 +144,10 @@ def main(): # handle user input
 		if changeMessage.upper() == "Y":
 			msgChanger()
 
-		sendTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "r").read()
+		sendTime = open("C:/Code/Python/AutoText/textTime.txt", "r").read()
 		timer(sendTime)	
 	else:
-		numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "w")
+		numberFile = open("C:/Code/Python/AutoText/textToNumbers.txt", "w")
 		numberFile.close()
 
 		howManyNumbers()
@@ -142,5 +159,5 @@ while __name__ == "__main__":
 		callTimer = True
 		main()
 	else:
-		msgTimer = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "r").read()
+		msgTimer = open("C:/Code/Python/AutoText/textTime.txt", "r").read()
 		timer(msgTimer)

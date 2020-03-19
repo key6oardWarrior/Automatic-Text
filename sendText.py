@@ -43,7 +43,7 @@ def howManyNumbers(): # ask user how many numbers do they want to add
 	for i in range(0, num):
 		addNums2File()
 
-def sendMessage(msgTimer): # send a message to each number on file
+def sendMessage(): # send a message to each number on file
 	textFrom = open("C:/FBS/FBSTC/Text_TC/textFrom.txt", "r").read()
 	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "r").read()
 	lstNums = [""]
@@ -77,7 +77,7 @@ def getTime(): # return what time it is
 def timer(msgTimer): # determin when to send the message
 	while getTime() != msgTimer:
 		pass
-	sendMessage(msgTimer)
+	sendMessage()
 
 def main(): # determin if send text or add numbers to file
 	if os.path.exists("C:/FBS/FBSTC/Text_TC/textToNumbers.txt"):

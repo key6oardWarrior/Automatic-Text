@@ -2,9 +2,7 @@ import os
 import datetime
 from twilio.rest import Client
 
-''' 
-* @author: https://github.com/key6oardWarrior
-'''
+# @author: https://github.com/key6oardWarrior
 
 authFile = open("C:/FBS/FBSTC/Text_TC/AUTH.txt", "r").read()
 sid = authFile[:34]

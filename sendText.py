@@ -8,6 +8,7 @@ authFile = open("C:/FBS/FBSTC/Text_TC/AUTH.txt", "r").read()
 sid = authFile[:34]
 authToken = authFile[36:]
 client = Client(sid, authToken)
+x = False
 
 def addNums2File(): # add each number to file
 	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "a")
@@ -59,7 +60,7 @@ def sendMessage(msgTimer): # send a message to each number on file
 
 	for i in lstNums: # send message
 		message = client.messages.create(
-			body = "URGENT: Please Check the Tech Coach schedule to know if you are working today!\nPlease do not respond this is an automated messaging system.\nDesigned by https://github.com/key6oardWarrior",
+			body = "This is an automated messaging system.\nDesigned by https://github.com/key6oardWarrior",
 			from_ = textFrom, 
 			to = i
 		)
@@ -68,7 +69,6 @@ def sendMessage(msgTimer): # send a message to each number on file
 			print(message.sid + " sent the message!")
 		else:
 			print(message.sid)
-	timer(msgTimer)
 
 def getTime(): # return what time it is
 	dateTime = datetime.datetime.now()
@@ -117,4 +117,9 @@ def main(): # determin if send text or add numbers to file
 		howManyNumbers()
 
 while __name__ == "__main__":
-	main()
+	if x == False:
+		x = True
+		main()
+	else:
+		msgTimer = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "r").read()
+		timer(msgTimer)

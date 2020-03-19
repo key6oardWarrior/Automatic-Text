@@ -9,7 +9,7 @@ sid = ""
 authToken = ""
 callTimer = False
 
-if not(os.path.exists("C:/Code/Python/AutoText/AUTH.txt")):
+if not(os.path.exists("C:/Code/Python/AutoText/AUTH.txt")): # first time users setup
 	authFile = open("C:/Code/Python/AutoText/AUTH.txt", "w")
 	authFile.write(input("Enter Twilio SID: ") + ", ")
 	authFile.write(input("Enter Twilio authentcation token: "))
@@ -60,13 +60,13 @@ def howManyNumbers(): # ask user how many numbers do they want to add
 	for i in range(0, num):
 		addNums2File()
 
-def removeNums():
+def removeNums(): # remove numbers from list of nums 2 be texted
 	nums = [""]
 	numbers = open("C:/Code/Python/AutoText/textToNumbers.txt", "r").read()
-	nums2Remove = input("What numbers do you want to remove (seprate each by whitespace)? ")
+	nums2Remove = input("What numbers do you want to remove (seprate phone number each by a whitespace)? ")
 	j = 0
 
-	for i in range(len(numbers)):
+	for i in range(len(numbers)): # add all nums to nums list
 		if numbers[i] != " ":
 			nums[j] += numbers[i]
 		else:
@@ -74,11 +74,13 @@ def removeNums():
 			j += 1
 
 	j = 0
-	for i in nums:
-		print(nums)
-		if i == numbers[j: j+10]:
-			numbers = numbers.strip(numbers[j: j+11])
-			j += 11
+	for i in nums: # remove all occurrences of nums2Remove
+		try:
+			if i == nums2Remove[j: j+10]:
+				numbers = numbers.strip(i)
+				j += 11
+		except:
+			break
 
 	print("final print: " + numbers)
 	fileWriter = open("C:/Code/Python/AutoText/textToNumbers.txt", "w").write(numbers)
@@ -128,7 +130,7 @@ def timer(msgTimer): # determin when to send the message
 
 def main(): # handle user input
 	if os.path.exists("C:/Code/Python/AutoText/textToNumbers.txt"):
-		isAddNums = input("Do you want to add numbers to the list of numbers? Y/n ")
+		isAddNums = input("Do you want to add numbers to be texted? Y/n ")
 		if isAddNums.upper() == "Y":
 			howManyNumbers()
 
@@ -146,7 +148,7 @@ def main(): # handle user input
 
 		sendTime = open("C:/Code/Python/AutoText/textTime.txt", "r").read()
 		timer(sendTime)	
-	else:
+	else: # first time users setup
 		numberFile = open("C:/Code/Python/AutoText/textToNumbers.txt", "w")
 		numberFile.close()
 

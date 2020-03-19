@@ -43,9 +43,39 @@ def howManyNumbers(): # ask user how many numbers do they want to add
 	for i in range(0, num):
 		addNums2File()
 
+def removeNums():
+	nums = [""]
+	numbers = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "r").read()
+	nums2Remove = input("What numbers do you want to remove (seprate each by whitespace)? ")
+	j = 0
+
+	for i in range(len(numbers)):
+		if numbers[i] != " ":
+			nums[j] += numbers[i]
+		else:
+			nums.append("")
+			j += 1
+
+	j = 0
+	for i in nums:
+		print(nums)
+		if i == numbers[j: j+10]:
+			numbers = numbers.strip(numbers[j: j+11])
+			j += 11
+
+	print("final print: " + numbers)
+	fileWriter = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "w").write(numbers)
+
+def timeChanger():
+	textTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "w").write(input("What time do you want your message to be recived? Format MUST BE: hh:mm:ss "))
+
+def msgChanger():
+	messageChanger = open("C:/FBS/FBSTC/Text_TC/message.txt", "w").write(input("Enter new message: "))
+
 def sendMessage(): # send a message to each number on file
 	textFrom = open("C:/FBS/FBSTC/Text_TC/textFrom.txt", "r").read()
 	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "r").read()
+	message = open("C:/FBS/FBSTC/Text_TC/message.txt").read()
 	lstNums = [""]
 	j = 0
 
@@ -60,7 +90,7 @@ def sendMessage(): # send a message to each number on file
 
 	for i in lstNums: # send message
 		message = client.messages.create(
-			body = "This is an automated messaging system.\nDesigned by https://github.com/key6oardWarrior",
+			body = message + "\nThis is an automated messaging system. Designed by https://github.com/key6oardWarrior",
 			from_ = textFrom, 
 			to = i
 		)
@@ -79,42 +109,33 @@ def timer(msgTimer): # determin when to send the message
 		pass
 	sendMessage()
 
-def main(): # determin if send text or add numbers to file
+def main(): # handle user input
 	if os.path.exists("C:/FBS/FBSTC/Text_TC/textToNumbers.txt"):
 		isAddNums = input("Do you want to add numbers to the list of numbers? Y/n ")
-
 		if isAddNums.upper() == "Y":
 			howManyNumbers()
-			isSendMessage = input("Do you want to text all numbers? Y/n ")
 
-			if isSendMessage.upper() == "Y":
-				sendTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "r").read()
-				timer(sendTime)
-			else:
-				print("Message not sent :(")
-		else:
-			changeTime = input("Do you want to change the send time? Y/n ")
+		isRemoveNumbers = input("Do you want to remove any numbers? Y/n ")
+		if isRemoveNumbers.upper() == "Y":
+			removeNums()
 
-			if changeTime.upper() == "Y":
-				textTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "w")
-				temp = input("What time do you want to text your people/person? Format: hh:mm:ss ")
-				textTime.write(temp)
-				textTime.close()
+		changeTime = input("Do you want to change the send time? Y/n ")
+		if changeTime.upper() == "Y":
+			timeChanger()
 
-				sendTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "r").read()
-				timer(sendTime)
-			else:
-				sendTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "r").read()
-				timer(sendTime)	
+		changeMessage = input("Do you want to change the automated message? Y/n ")
+		if changeMessage.upper() == "Y":
+			msgChanger()
+
+		sendTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "r").read()
+		timer(sendTime)	
 	else:
 		numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "w")
 		numberFile.close()
-		textTime = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "w")
 
-		temp = input("What time do you want to text your people/person? Format: hh:mm:ss ")
-		textTime.write(temp)
-		textTime.close()
 		howManyNumbers()
+		msgChanger()
+		timeChanger()
 
 while __name__ == "__main__":
 	if callTimer == False:

@@ -8,7 +8,7 @@ authFile = open("C:/FBS/FBSTC/Text_TC/AUTH.txt", "r").read()
 sid = authFile[:34]
 authToken = authFile[36:]
 client = Client(sid, authToken)
-x = False
+callTimer = False
 
 def addNums2File(): # add each number to file
 	numberFile = open("C:/FBS/FBSTC/Text_TC/textToNumbers.txt", "a")
@@ -117,8 +117,8 @@ def main(): # determin if send text or add numbers to file
 		howManyNumbers()
 
 while __name__ == "__main__":
-	if x == False:
-		x = True
+	if callTimer == False:
+		callTimer = True
 		main()
 	else:
 		msgTimer = open("C:/FBS/FBSTC/Text_TC/textTime.txt", "r").read()

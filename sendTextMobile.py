@@ -7,7 +7,7 @@ from plyer import *
 
 class SetUp:
 	def addNums2File(self): # add each number to file
-		numberFile = open("C:/Code/Python/AutoText/textToNumbers.txt", "a")
+		numberFile = open("textToNumbers.txt", "a")
 		numbers = 0
 
 		try: # handle type mismatch
@@ -41,7 +41,7 @@ class SetUp:
 
 	def removeNums(self): # remove numbers from list of nums 2 be texted
 		nums = [""]
-		numbers = open("C:/Code/Python/AutoText/textToNumbers.txt", "r").read()
+		numbers = open("textToNumbers.txt", "r").read()
 		nums2Remove = input("What numbers do you want to remove (seprate phone number each by a whitespace)? ")
 		j = 0
 
@@ -62,18 +62,18 @@ class SetUp:
 				break
 
 		print("final print: " + numbers)
-		fileWriter = open("C:/Code/Python/AutoText/textToNumbers.txt", "w").write(numbers)
+		fileWriter = open("textToNumbers.txt", "w").write(numbers)
 
 	def timeChanger(self):
-		textTime = open("C:/Code/Python/AutoText/textTime.txt", "w").write(input("What time do you want your message to be recived? Format MUST BE: hh:mm:ss "))
+		textTime = open("textTime.txt", "w").write(input("What time do you want your message to be recived? Format MUST BE: hh:mm:ss "))
 
 	def msgChanger(self):
-		messageChanger = open("C:/Code/Python/AutoText/message.txt", "w").write(input("Enter new message: "))
+		messageChanger = open("message.txt", "w").write(input("Enter new message: "))
 
 class MsgTimer:
 	def sendMessage(self): # send a message to each number on file
-		numberFile = open("C:/Code/Python/AutoText/textToNumbers.txt", "r").read()
-		message = open("C:/Code/Python/AutoText/message.txt").read()
+		numberFile = open("textToNumbers.txt", "r").read()
+		message = open("message.txt").read()
 		lstNums = [""]
 		j = 0
 
@@ -103,7 +103,7 @@ class Main:
 	def main(self): # handle user input
 		setUp = SetUp()
 
-		if os.path.exists("C:/Code/Python/AutoText/textToNumbers.txt"):
+		if os.path.exists("textToNumbers.txt"):
 			isAddNums = input("Do you want to add numbers to be texted? Y/n ")
 			if isAddNums.upper() == "Y":
 				setUp.howManyNumbers()
@@ -120,9 +120,9 @@ class Main:
 			if changeMessage.upper() == "Y":
 				setUp.msgChanger()
 
-			sendTime = open("C:/Code/Python/AutoText/textTime.txt", "r").read()
+			sendTime = open("textTime.txt", "r").read()
 		else: # first time users setup
-			numberFile = open("C:/Code/Python/AutoText/textToNumbers.txt", "w")
+			numberFile = open("textToNumbers.txt", "w")
 			numberFile.close()
 
 			setUp.howManyNumbers()
@@ -130,7 +130,7 @@ class Main:
 			setUp.timeChanger()
 
 		print("Starting auto texting application")
-		msgTimer = open("C:/Code/Python/AutoText/textTime.txt", "r").read()
+		msgTimer = open("textTime.txt", "r").read()
 		sendMsg = MsgTimer()
 		sendMsg.timer(msgTimer)
 

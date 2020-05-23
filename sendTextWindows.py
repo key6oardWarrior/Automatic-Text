@@ -95,17 +95,7 @@ def sendMessage(): # send a message to each number on file
 	textFrom = open("C:/Code/Python/AutoText/textFrom.txt", "r").read()
 	numberFile = open("C:/Code/Python/AutoText/textToNumbers.txt", "r").read()
 	message = open("C:/Code/Python/AutoText/message.txt").read()
-	lstNums = [""]
-	j = 0
-
-	for i in range(0, len(numberFile)): # adds numbers to list
-		try:
-			if numberFile[i] != " ":
-				lstNums[j] += numberFile[i]
-			else:
-				j += 1
-		except:
-			break
+	lstNums = numberFile.split()
 
 	for i in lstNums: # send message
 		message = client.messages.create(

@@ -73,21 +73,10 @@ class SetUp:
 class MsgTimer:
 	def sendMessage(self): # send a message to each number on file
 		numberFile = open("textToNumbers.txt", "r").read()
-		message = open("message.txt").read()
-		lstNums = [""]
-		j = 0
-
-		for i in range(len(numberFile)): # adds numbers to list
-			try:
-				if numberFile[i] != " ":
-					lstNums[j] += numberFile[i]
-				else:
-					j += 1
-			except:
-				break
+		message = open("message.txt", "r").read()
+		lstNums = numberFile.split()
 
 		for i in lstNums:
-			i = i.strip(" ")
 			sms.send(i, message)
 
 	def getTime(self): # return what time it is
@@ -134,5 +123,5 @@ class Main:
 		sendMsg = MsgTimer()
 		sendMsg.timer(msgTimer)
 
-main = Main()
-main.main()
+app = Main()
+app.main()

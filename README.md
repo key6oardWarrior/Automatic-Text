@@ -11,6 +11,3 @@ Send text messages automatically to any phone number(s). The application works f
 6) On Linux type `sudo python sendTextDesktop.py`
 
 # Android/iOS Setup
-0) Download a Python editor or IDE
-1) install the plyer dependency
-2) Run the code `sendTextMobile.py`

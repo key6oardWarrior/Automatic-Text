@@ -7,7 +7,9 @@ Send text messages automatically to any phone number(s). The application works f
 2) Clone this repo
 3) Open cmd/terminal
 4) Type `cd [directory of Automatic-Text]`
+
 5a) On Windows type `python sendText.py`
+
 5b) On Linux type `sudo python sendText.py`
 
 # For Android or iOS

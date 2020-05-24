@@ -7,7 +7,6 @@ from twilio.rest import Client
 
 class SetUp:
 	def addNums2File(self): # add each number to file
-		numberFile = open("textToNumbers.txt", "a")
 		numbers = 0
 
 		try: # handle type mismatch
@@ -20,8 +19,7 @@ class SetUp:
 			print("Your number must be 10 digits")
 			return self.addNums2File()
 		else:
-			numberFile.write(str(numbers) + " ")
-		numberFile.close()
+			open("textToNumbers.txt", "a").write(str(numbers) + " ")
 
 	def howManyNumbers(self): # ask user how many numbers do they want to add
 		num = 0
@@ -41,18 +39,20 @@ class SetUp:
 
 	def removeNums(self): # remove numbers from list of nums 2 be texted
 		nums = open("textToNumbers.txt", "r").read().split()
-		nums2Remove = input("What numbers do you want to remove (seprate phone number each by a whitespace)? ").split()
+		nums2Remove = input("What numbers do you want to remove? Seprate each phone number each by a whitespace. ").split()
 
-		for i in range(len(nums)): # remove all occurrences of nums2Remove[j]
-			try:
-				if nums[i] == nums2Remove[0]:
-					del nums[i]
-					i = -1
-			except:
-				pass
+		for i in range(len(nums)): # remove numbers that are in both nums & nums2Remove
+			if nums[i] in nums2Remove:
+				del nums[i]
+				i = 0
 
+		isWrite = True
 		for i in nums:
-			open("textToNumbers.txt", "w").write(i + " ")
+			if isWrite == False:
+				open("textToNumbers.txt", "a").write(i + " ")
+			else:
+				open("textToNumbers.txt", "w").write(i + " ")
+				isWrite = False
 
 class MsgTimer:
 	def timeChanger(self):
@@ -64,7 +64,7 @@ class MsgTimer:
 	def sendMessage(self): # send a message to each number on file
 		textFrom = open("textFrom.txt", "r").read().strip(" ")
 		lstNums = open("textToNumbers.txt", "r").read().split()
-		message = open("message.txt").read()
+		message = open("message.txt", "r").read()
 
 		for i in lstNums: # send message
 			message = Main.client.messages.create(

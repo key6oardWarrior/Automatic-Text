@@ -7,7 +7,6 @@ from plyer import *
 
 class SetUp:
 	def addNums2File(self): # add each number to file
-		numberFile = open("textToNumbers.txt", "a")
 		numbers = 0
 
 		try: # handle type mismatch
@@ -20,8 +19,7 @@ class SetUp:
 			print("Your number must be 10 digits")
 			return self.addNums2File()
 		else:
-			numberFile.write(str(numbers) + " ")
-		numberFile.close()
+			open("textToNumbers.txt", "a").write(str(numbers) + " ")
 
 	def howManyNumbers(self): # ask user how many numbers do they want to add
 		num = 0
@@ -40,41 +38,28 @@ class SetUp:
 			self.addNums2File()
 
 	def removeNums(self): # remove numbers from list of nums 2 be texted
-		nums = [""]
-		numbers = open("textToNumbers.txt", "r").read()
-		nums2Remove = input("What numbers do you want to remove (seprate phone number each by a whitespace)? ")
+		nums = open("textToNumbers.txt", "r").read().split()
+		nums2Remove = input("What numbers do you want to remove? Seprate each phone number each by a whitespace. ").split()
 		j = 0
 
-		for i in range(len(numbers)): # add all nums to nums list
-			if numbers[i] != " ":
-				nums[j] += numbers[i]
-			else:
-				nums.append("")
-				j += 1
+		for i in range(len(nums)): # remove numbers that are in both nums & nums2Remove
+			if nums[i] in nums2Remove:
+				del nums[i]
+				i = 0
 
-		j = 0
-		for i in nums: # remove all occurrences of nums2Remove
-			try:
-				if i == nums2Remove[j: j+10]:
-					numbers = numbers.strip(i)
-					j += 11
-			except:
-				break
-
-		print("final print: " + numbers)
-		fileWriter = open("textToNumbers.txt", "w").write(numbers)
+		for i in nums:
+			open("textToNumbers.txt", "w").write(i + " ")
 
 	def timeChanger(self):
-		textTime = open("textTime.txt", "w").write(input("What time do you want your message to be recived? Format MUST BE: hh:mm:ss "))
+		open("textTime.txt", "w").write(input("What time do you want your message to be recived? Format MUST BE: hh:mm:ss "))
 
 	def msgChanger(self):
-		messageChanger = open("message.txt", "w").write(input("Enter new message: "))
+		open("message.txt", "w").write(input("Enter new message: "))
 
 class MsgTimer:
 	def sendMessage(self): # send a message to each number on file
-		numberFile = open("textToNumbers.txt", "r").read()
+		lstNums = open("textToNumbers.txt", "r").read().split()
 		message = open("message.txt", "r").read()
-		lstNums = numberFile.split()
 
 		for i in lstNums:
 			sms.send(i, message)

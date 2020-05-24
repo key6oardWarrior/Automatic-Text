@@ -10,4 +10,7 @@ Send text messages automatically to any phone number(s). The application works f
 5) On Windows type `python sendTextDesktop.py`
 6) On Linux type `sudo python sendTextDesktop.py`
 
-# Android/iOS Setup
+# Android Setup
+0) Setup a Ubuntu VM
+1) Setup buildozer
+2) Run buildozer on Android

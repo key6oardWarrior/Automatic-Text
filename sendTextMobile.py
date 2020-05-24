@@ -47,8 +47,13 @@ class SetUp:
 				del nums[i]
 				i = 0
 
+		isWrite = True
 		for i in nums:
-			open("textToNumbers.txt", "w").write(i + " ")
+			if isWrite == False:
+				open("textToNumbers.txt", "a").write(i + " ")
+			else:
+				open("textToNumbers.txt", "w").write(i + " ")
+				isWrite = False
 
 	def timeChanger(self):
 		open("textTime.txt", "w").write(input("What time do you want your message to be recived? Format MUST BE: hh:mm:ss "))

@@ -41,18 +41,13 @@ class SetUp:
 		nums = open("textToNumbers.txt", "r").read().split()
 		nums2Remove = input("What numbers do you want to remove? Seprate each phone number each by a whitespace. ").split()
 
-		for i in range(len(nums)): # remove numbers that are in both nums & nums2Remove
-			if nums[i] in nums2Remove:
-				del nums[i]
-				i = 0
+		for i in nums2Remove:
+			if i in nums:
+				INDEX = nums.index(i)
+				del nums[INDEX]
 
-		isWrite = True
 		for i in nums:
-			if isWrite == False:
-				open("textToNumbers.txt", "a").write(i + " ")
-			else:
-				open("textToNumbers.txt", "w").write(i + " ")
-				isWrite = False
+			open("textToNumbers.txt", "w").write(i + " ")
 
 class MsgTimer:
 	def timeChanger(self):

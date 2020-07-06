@@ -37,6 +37,7 @@ class SetUp:
 		for i in range(0, num):
 			self.addNums2File()
 
+	# test
 	def removeNums(self): # remove numbers from list of nums 2 be texted
 		nums = open("textToNumbers.txt", "r").read().split()
 		nums2Remove = input("What numbers do you want to remove? Seprate each phone number each by a whitespace. ").split()

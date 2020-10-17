@@ -3,12 +3,11 @@ Send text messages automatically to any phone number(s). The application works f
 
 # Windows/Linux Setup
 0) Sign up/in to twillo via: https://www.twilio.com/login
-1) Follow directions given by program to auto send messages to phone numbers.
-2) Clone this repo
-3) Open cmd/terminal
-4) Type `cd [directory of Automatic-Text]`
-5) On Windows type `python sendTextDesktop.py`
-6) On Linux type `sudo python sendTextDesktop.py`
+1) Clone this repo
+2) Open cmd/terminal
+3) Type `cd [directory of Automatic-Text]`
+4) On Windows type `py sendTextDesktop.py`
+5) On Linux type `sudo python sendTextDesktop.py`
 
 # Android Setup
 0) Setup a Ubuntu VM
